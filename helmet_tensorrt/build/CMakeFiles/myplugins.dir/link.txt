@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC  -std=c++11 -Wall -Ofast -Wfatal-errors -D_MWAITXINTRIN_H_INCLUDED -g  -shared -Wl,-soname,libmyplugins.so -o libmyplugins.so CMakeFiles/myplugins.dir/myplugins_generated_yololayer.cu.o  -L/usr/local/cuda/lib64  -L/usr/lib/x86_64-linux-gnu -Wl,-rpath,/usr/local/cuda/lib64:/usr/lib/x86_64-linux-gnu /usr/local/cuda/lib64/libcudart.so -lnvinfer -lcudart 
