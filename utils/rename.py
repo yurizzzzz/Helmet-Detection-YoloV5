@@ -1,12 +1,19 @@
 import os
 from tqdm import tqdm
 
-train_list = [file for file in os.listdir('C:/Users/dell/Desktop/VOC2021/Annotations') if file.endswith('.xml')]
+train_list = [
+    file
+    for file in os.listdir('C:/Users/dell/Desktop/datasets/val/Annotations')
+    if file.endswith('.xml')
+]
 train_list = tqdm(train_list)
 j = 0
 
 for i in train_list:
-    os.rename('C:/Users/dell/Desktop/VOC2021/Annotations/' + i, 'C:/Users/dell/Desktop/VOC2021/Annotations/' + '{:0>4s}'.format(str(j)) + '.xml')
+    os.rename(
+        'C:/Users/dell/Desktop/datasets/val/Annotations/' + i,
+        'C:/Users/dell/Desktop/datasets/val/Annotations/' +
+        '{:0>4s}'.format(str(j)) + '.xml')
     j += 1
 
 # for i in range(100):
