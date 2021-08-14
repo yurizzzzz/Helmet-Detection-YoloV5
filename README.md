@@ -89,7 +89,7 @@ $ 例子 : python3 yolov5_trt.py --source img --img_dir test.jpg --engine_dir he
                       |--trainval.txt
                       |--test.txt
 ```
-- （可选）将VOC格式数据集转换成yolo格式数据集，在```../utils/gen_yolo_format.py```生成yolo格式数据集如下格式
+- (可选)将VOC格式数据集转换成yolo格式数据集，在```../utils/gen_yolo_format.py```生成yolo格式数据集如下格式
 ```
 ---|
    |---images--|
@@ -101,7 +101,6 @@ $ 例子 : python3 yolov5_trt.py --source img --img_dir test.jpg --engine_dir he
                |--train
                |--val
                |--test
-    
 ```
 - 克隆YoloV5官方的代码到本地
 ```
@@ -134,10 +133,15 @@ nc: 2  # number of classes
 $ python train.py --epochs 200 --data custom_data.yaml --cfg yolov5s.yaml --weights yolov5s.pt --device 0
 ```
 - 在路径下会生成runs文件夹里面找到weights里的best.pt就是训练好的权重
+- 使用TensorRT加速训练好的模型详情请见官方教程[YoloV5_tesnorrt](https://github.com/wang-xinyu/tensorrtx/tree/master/yolov5)
 
 # Results
 - 检测分类为person和hat分别代表没戴安全帽和戴安全帽
 ![效果图2](https://github.com/FanDady/Helmet-Detection-YoloV5/blob/master/result_img/results.jpg)  
 - 下图为训练的一个指标结果图
 ![效果图3](https://github.com/FanDady/Helmet-Detection-YoloV5/blob/master/result_img/results.png)
+
+# Reference
+- [YoloV5](https://github.com/ultralytics/yolov5)
+- [YoloV5-tensorrt](https://github.com/wang-xinyu/tensorrtx/tree/master/yolov5)
 
