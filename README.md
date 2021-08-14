@@ -1,5 +1,5 @@
 # Helmet-Detection-YoloV5
-本项目主要基于YoloV5s-V5.0版本实现工地上安全帽佩戴的检测，因此本项目的主要实现背景是在Jetson Nano上部署好安全帽佩戴检测的代码，当然，在Windows/Linux上同样可以实现，并且本项目包含TensorRT加速使其能够在边缘硬件平台上能够更快更实时的处理数据。  
+本项目主要基于YoloV5s-V5.0版本实现工地上安全帽佩戴的检测，因此本项目的主要实现背景是在Jetson Nano上部署好安全帽佩戴检测的代码，当然，在Windows/Linux上同样可以实现，并且本项目包含TensorRT加速使其能够在边缘硬件平台上能够更快更实时的处理数据，再次**强调**本项目使用的YoloV5是属于**YoloV5s**网络是属于模型最小的，并且版本是**V5.0**(各个版本不是很兼容各版本有点差别)  
 
 ![效果图1](https://github.com/FanDady/Helmet-Detection-YoloV5/blob/master/result_img/val_batch2_pred.jpg)  
 # Requirement
@@ -61,14 +61,79 @@ $ 例子 : python3 yolov5_trt.py --source img --img_dir test.jpg --engine_dir he
 > 注意：下面两个格式的数据集中的内容都是一样的只不过是内容存放的格式以及内容需要的文件格式不同而已，二者可以相互转换
 - 安全帽VOC格式数据集
 ```
-百度网盘链接：https://pan.baidu.com/s/1dE23iElE3iGVdsPfQYm3jg
-提取码：ir9x
+# 百度网盘链接：https://pan.baidu.com/s/1dE23iElE3iGVdsPfQYm3jg
+# 提取码：ir9x
 ```
 - 安全帽Yolo格式数据集
 ```
-百度网盘链接：https://pan.baidu.com/s/1CceCFIYzpBjjPcCe4_dr7g
-提取码：gyre
+# 百度网盘链接：https://pan.baidu.com/s/1CceCFIYzpBjjPcCe4_dr7g
+# 提取码：gyre
 ```
+
+# How to train
+- 准备好安全帽的yolo格式数据集(已上传如上)和官方YoloV5s权重文件
+```
+# yoloV5s权重百度网盘链接：https://pan.baidu.com/s/1PPEDV2UZsPLpugEAEW2wGg
+# 提取码：6pfy
+```
+- (可选)制作自己的数据集，收集好图像并命名好使用Labelbox 、CVAT 、精灵标注助手等标注工具标注生成xml文件并且文件格式放置参照VOC数据集格式如下其中Main文件的txt文件可通过```../utils/generate_txt.py```生成
+```
+---|
+   |---Annotations----.xml
+   |
+   |---JPEGImages-----.jpg
+   |
+   |---Main-----------|
+                      |--train.txt
+                      |--val.txt
+                      |--trainval.txt
+                      |--test.txt
+```
+- （可选）将VOC格式数据集转换成yolo格式数据集，在```../utils/gen_yolo_format.py```生成yolo格式数据集如下格式
+```
+---|
+   |---images--|
+   |           |--test
+   |           |--train
+   |           |--val
+   |
+   |---labels--|
+               |--train
+               |--val
+               |--test
+    
+```
+- 克隆YoloV5官方的代码到本地
+```
+$ git clone https://github.com/ultralytics/yolov5.git
+```
+- 准备好环境
+```
+$ cd yolov5
+$ pip install -r requirements.txt
+```
+- 创建配置文件修改```data/custom_data.yaml```文件
+```
+# 设置数据集的路径
+train: data/Safety_Helmet_Train_dataset/score/images/train
+val: data/Safety_Helmet_Train_dataset/score/images/val
+
+# 分类数量
+nc: 2
+
+# 类别名称
+names: ['person', 'hat']
+```
+- 在models文件夹中选择需要训练的模型这里选择的是yoloV5s训练并修改配置存放好为```yolov5s.yaml```
+```
+# 这里只需要修改类别数量即可
+nc: 2  # number of classes
+```
+- 执行训练文件
+```
+$ python train.py --epochs 200 --data custom_data.yaml --cfg yolov5s.yaml --weights yolov5s.pt --device 0
+```
+- 在路径下会生成runs文件夹里面找到weights里的best.pt就是训练好的权重
 
 # Results
 - 检测分类为person和hat分别代表没戴安全帽和戴安全帽
