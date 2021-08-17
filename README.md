@@ -1,7 +1,7 @@
 # Helmet-Detection-YoloV5
 本项目主要基于YoloV5s-V5.0版本实现工地上安全帽佩戴的检测，因此本项目的主要实现背景是在Jetson Nano上部署好安全帽佩戴检测的代码，当然，在Windows/Linux上同样可以实现，并且本项目包含TensorRT加速使其能够在边缘硬件平台上能够更快更实时的处理数据，再次**强调**本项目使用的YoloV5是属于**YoloV5s**网络是属于模型最小的，并且版本是**V5.0**(各个版本不是很兼容各版本有点差别)  
 
-![效果图1](https://github.com/FanDady/Helmet-Detection-YoloV5/blob/master/result_img/val_batch2_pred.jpg)  
+![效果图1](https://z3.ax1x.com/2021/08/17/f4v1Z8.jpg)  
 # Requirement
 ```
 Python>=3.6.0
@@ -137,9 +137,9 @@ $ python train.py --epochs 200 --data custom_data.yaml --cfg yolov5s.yaml --weig
 
 # Results
 - 检测分类为person和hat分别代表没戴安全帽和戴安全帽
-![效果图2](https://github.com/FanDady/Helmet-Detection-YoloV5/blob/master/result_img/results.jpg)  
+![效果图2](https://z3.ax1x.com/2021/08/17/f4vYGj.jpg)  
 - 下图为训练的一个指标结果图
-![效果图3](https://github.com/FanDady/Helmet-Detection-YoloV5/blob/master/result_img/results.png)
+![效果图3](https://z3.ax1x.com/2021/08/17/f4vcW9.png)
 
 # Reference
 - [YoloV5](https://github.com/ultralytics/yolov5)
