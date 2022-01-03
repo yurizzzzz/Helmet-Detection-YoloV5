@@ -1,0 +1,8 @@
+train: data/Safety_Helmet_Train_dataset/score/images/train
+val: data/Safety_Helmet_Train_dataset/score/images/val
+
+# number of classes
+nc: 2
+
+# class names
+names: ['person', 'hat']
